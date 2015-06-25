@@ -9,7 +9,7 @@ PLUGIN_MAJORDOMO_DESCRIPTION
 	RU	Плагин отправляет HTTP-запросы на сервер MajorDoMo, когда изменяется статус плеера.
 
 PLUGIN_MAJORDOMO_INTRO
-	RU	MajorDoMo LMS Connect
+	RU	MajorDoMo Connect Plug-in
 	
 PLUGIN_MAJORDOMO_SAVE
 	RU	Необходимо перезапустить службу LMS, чтобы применить изменения.

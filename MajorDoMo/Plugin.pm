@@ -1,4 +1,4 @@
-#	MajorDoMo Connect Pugin
+#	MajorDoMo Connect Plug-in
 #
 #	Author:	Agaphonov Dmitri <skysilver.da@gmail.com>
 #

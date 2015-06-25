@@ -5,7 +5,7 @@
     <defaultState>enabled</defaultState> 
     <description>PLUGIN_MAJORDOMO_DESCRIPTION</description> 
     <email>skysilver.da@gmail.com</email> 
-    <homepageURL>https://github.com/skysilver-lab/MajorDoMo-LMS-Connect</homepageURL> 
+    <homepageURL>http://skysilver-lab.github.io/MajorDoMo-LMS-Connect</homepageURL> 
 	<icon>plugins/MajorDoMo/html/images/MajorDoMo.png</icon>
     <module>Plugins::MajorDoMo::Plugin</module> 
 	<targetApplication>
@@ -14,5 +14,5 @@
 		<minVersion>7.7</minVersion> 
 	</targetApplication>
     <type>2</type> 
-    <version>0.2.0</version> 
+    <version>0.3.0</version> 
  </extension>
