@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extensions>
+	<plugins>
+		<plugin name="MajorDoMo" version="0.2.0" minTarget="7.7" maxTarget="*">
+			<title lang="EN">MajorDoMo</title>
+			<title lang="RU">MajorDoMo</title>
+			<desc lang="EN">Plugin for integration of LMS with MajorDoMo system</desc>
+			<desc lang="RU">Плагин для интеграции LMS с системой домашней автоматизации MajorDoMo</desc>
+			<url>http://skysilver-lab.github.io/MajorDoMo-LMS-Connect/repository/MajorDoMo-v0.2.0.zip</url>
+			<link>http://skysilver-lab.github.io/MajorDoMo-LMS-Connect/</link>
+			<creator>Agaphonov Dmitri</creator>
+			<email>skysilver.da@gmail.com</email>
+			<sha>54e1f748083daa3c823ac8570e5a93fcb6e8d517</sha>
+		</plugin>
+	</plugins>
+</extensions>
+
