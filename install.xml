@@ -5,15 +5,15 @@
     <defaultState>enabled</defaultState> 
     <description>PLUGIN_MAJORDOMO_DESCRIPTION</description> 
     <email>skysilver.da@gmail.com</email> 
-    <homepageURL>http://code.google.com/p/sbnetio/</homepageURL> 
+    <homepageURL>http://majordomo.smartliving.ru/</homepageURL> 
     <id>6D8FF6EB-EC05-52FA-02AA-ACE56E922129</id> 
-  <icon>plugins/MajorDoMo/html/images/MajorDoMo.png</icon>
+	<icon>plugins/MajorDoMo/html/images/MajorDoMo.png</icon>
     <module>Plugins::MajorDoMo::Plugin</module> 
-  <targetApplication>
-      <id>SqueezeCenter</id> 
-      <maxVersion>*</maxVersion> 
-      <minVersion>7.0</minVersion> 
-    </targetApplication>
+	<targetApplication>
+		<id>SqueezeCenter</id> 
+		<maxVersion>*</maxVersion> 
+		<minVersion>7.0</minVersion> 
+	</targetApplication>
     <type>2</type> 
     <version>0.2.0</version> 
-  </extension>
+ </extension>

@@ -4,10 +4,10 @@
 		<plugin name="MajorDoMo" version="0.2" minTarget="7.7" maxTarget="*">
 			<title lang="EN">MajorDoMo</title>
 			<title lang="RU">MajorDoMo</title>
-			<desc lang="EN">Plugin for integration of LMS with MajorDoMo Server</desc>
-			<desc lang="RU">Плагин для интеграции LMS с сервером MajorDoMo</desc>
-			<url>https://yadi.sk/d/hlJ5sT9AhThWN</url>
-			<link>http://code.google.com/p/sbnetio/</link>
+			<desc lang="EN">Plugin for integration of LMS with MajorDoMo system</desc>
+			<desc lang="RU">Плагин для интеграции LMS с системой домашней автоматизации MajorDoMo</desc>
+			<url>https://github.com/skysilver-lab/MajorDoMo-LMS-Connect/archive/master.zip</url>
+			<link>http://majordomo.smartliving.ru/</link>
 			<creator>Agaphonov Dmitri</creator>
 			<email>skysilver.da@gmail.com</email>
 			<sha>8030c3fcad817c4b0db84a23d3b57738003adc25</sha>
