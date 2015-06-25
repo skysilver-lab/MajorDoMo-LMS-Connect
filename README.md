@@ -1,2 +1,2 @@
-# MajorDoMo-LMS-Connect
-Плагин для интеграции LMS с системой домашней автоматизации MajorDoMo.
+# MajorDoMo Connect Pugin
+Плагин для интеграции Logitech Media Server с системой домашней автоматизации MajorDoMo.

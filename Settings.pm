@@ -1,21 +1,20 @@
 package Plugins::MajorDoMo::Settings;
 
 use strict;
-use base qw(Slim::Web::Settings); 		#driven by the web UI
-use Slim::Utils::Strings qw(string); 	#we want to use text from the strings file
-use Slim::Utils::Log; 					#we want to use the log methods
-use Slim::Utils::Prefs; 				#we want access to the preferences methods
+use base qw(Slim::Web::Settings); 		#для использования веб-интерфейса
+use Slim::Utils::Strings qw(string); 	#для использования строк из текстовых файлов
+use Slim::Utils::Log; 					#для возможности логирования
+use Slim::Utils::Prefs; 				#для доступа к файлам настроек
 
 # ----------------------------------------------------------------------------
-# Global variables
+# Глобальные переменные
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
-# References to other classes
+# Общие настройки
 # ----------------------------------------------------------------------------
 my $classPlugin		= undef;
 
-# ----------------------------------------------------------------------------
 my $log = Slim::Utils::Log->addLogCategory({
 	'category'     => 'plugin.MajorDoMo',
 	'defaultLevel' => 'ERROR',
@@ -23,11 +22,12 @@ my $log = Slim::Utils::Log->addLogCategory({
 });
 
 # ----------------------------------------------------------------------------
-my $prefs = preferences('plugin.MajorDoMo'); #name of preferences file: prefs\plugin\MajorDoMo.pref
+# Путь и имя файла для хранения настроек плагина: prefs\plugin\MajorDoMo.pref
+# ----------------------------------------------------------------------------
+my $prefs = preferences('plugin.MajorDoMo');
 
 # ----------------------------------------------------------------------------
-# Define own constructor
-# - to save references to Plugin.pm
+# Конструктор плагина (тут ничего не меняем)
 # ----------------------------------------------------------------------------
 sub new {
 	my $class = shift;
@@ -42,33 +42,33 @@ sub new {
 }
 
 # ----------------------------------------------------------------------------
-# Name in the settings dropdown
+# Название пункта настроек плагина в веб-интерфейсе
 # ----------------------------------------------------------------------------
-sub name { #this is what is shown in the players menu on the web gui
+sub name {
 	return 'PLUGIN_MAJORDOMO_MODULE_NAME';
 }
 
 # ----------------------------------------------------------------------------
-# Webpage served for settings
+# Путь к странице настроек
 # ----------------------------------------------------------------------------
-sub page { #tells which file to use as the web page
+sub page { #какой файл использовать в качестве веб страницы
 	return 'plugins/MajorDoMo/settings/basic.html';
 }
 
 # ----------------------------------------------------------------------------
-# Settings are per player
+# Настройки индивидуальные для каждого плеера, поэтому возвращаем 1
 # ----------------------------------------------------------------------------
 sub needsClient {
-	return 1; #this means this is for a particular squeezebox, not the system
+	return 1;
 }
 
 # ----------------------------------------------------------------------------
-# Only show plugin for Squeezebox 3 or Receiver players
+# Выбираем для каких плееров можно использовать этот плагин
 # ----------------------------------------------------------------------------
 sub validFor {
 	my $class = shift;
 	my $client = shift;
-	# Receiver and Squeezebox2 also means SB3
+	
 	return $client->isPlayer && ($client->isa('Slim::Player::Receiver') || 
 		                         $client->isa('Slim::Player::Squeezebox2') ||
 								 $client->isa('Slim::Player::SqueezeLite') ||
@@ -76,55 +76,50 @@ sub validFor {
 }
 
 # ----------------------------------------------------------------------------
-# Handler for settings page
+# Обработчик страницы настроек плагина
 # ----------------------------------------------------------------------------
 sub handler {
 	my ($class, $client, $params) = @_; 
-	#passes the class and client objects along with the parameters
+	
+	# $client - объект клиента (плеера), который выбран в веб-интерфейсе
+	# Клиенты идентифицируются по 'playerid', равному мак-адресу плеера.
 
-	# $client is the client that is selected on the right side of the web interface!!!
-	# We need the client identified by 'playerid'
-
-	# Find player that fits the mac address supplied in $params->{'playerid'}
 	my @playerItems = Slim::Player::Client::clients();
 	foreach my $play (@playerItems) {
 		if( $params->{'playerid'} eq $play->macaddress()) {
-			$client = $play; #this particular player
+			$client = $play;
 			last;
 		}
 	}
 	if( !defined( $client)) {
-		#set the class object with the particular player
 		return $class->SUPER::handler($client, $params); 
 		$log->debug( "found player: " . $client . "\n");
 	}
 
-	
-	# Fill in name of player
 	if( !$params->{'playername'}) {
-		#get the player name but I don't use it
 		$params->{'playername'} = $client->name(); 
 		$log->debug( "player name: " . $params->{'playername'} . "\n");
 	}
 	
-	# When "Save" is pressed on the settings page, this function gets called.
+	# Функция, вызываемая при нажатии на кнопку "Сохранить"
 	if ($params->{'saveSettings'}) {
-		#store the enabled value in the client prefs
-		if ($params->{'pref_Enabled'}){ #save the enabled state
+		
+		#Сохраняем значения в файл настроек
+		
+		if ($params->{'pref_Enabled'}){ #Статус плагина для плеера - включен или выключен
 			$prefs->client($client)->set('pref_Enabled', 1); 
 		} else {
 			$prefs->client($client)->set('pref_Enabled', 0);
 		}
 		
-		# General settings --------------------------------------------------------------
-		if ($params->{'srvAddress'}) { #save the Server IP Address
+		
+		if ($params->{'srvAddress'}) { #IP-адрес сервера MajorDoMo
 			my $srvAddress = $params->{'srvAddress'};
-			# get rid of leading spaces if any since one is always added.
 			$srvAddress =~ s/^(\s*)(.*)(\s*)$/$2/;
-			#save the server address in the client prefs
 			$prefs->client($client)->set('srvAddress', "$srvAddress"); 
 		}
 		
+		# HTTP-запросы для разных состояний плеера
 		if ($params->{'msgOn1'}) { 
 			my $msgOn = $params->{'msgOn1'};
 			$prefs->client($client)->set('msgOn1', "$msgOn"); 
@@ -148,21 +143,18 @@ sub handler {
 		
 	}
 
-	# Puts the values on the webpage. 
-	#next line takes the stored plugin pref value and puts it on the web page
-	#set the enabled checkbox on the web page
+	# Заполняем поля на странице настроек плагина в веб-интерфейсе.
+	# Значения берутся из файла настроек.
 	if($prefs->client($client)->get('pref_Enabled') == '1') {
 		$params->{'prefs'}->{'pref_Enabled'} = 1; 
 	}
 
-	# this puts the text fields in the web page
 	$params->{'prefs'}->{'srvAddress'} = $prefs->client($client)->get('srvAddress'); 
 	$params->{'prefs'}->{'msgOn1'} = $prefs->client($client)->get('msgOn1'); 
 	$params->{'prefs'}->{'msgOff1'} = $prefs->client($client)->get('msgOff1'); 
 	$params->{'prefs'}->{'msgPlay1'} = $prefs->client($client)->get('msgPlay1'); 
 	$params->{'prefs'}->{'msgPause1'} = $prefs->client($client)->get('msgPause1'); 
 	$params->{'prefs'}->{'msgVolume1'} = $prefs->client($client)->get('msgVolume1'); 
-	
 	
 	return $class->SUPER::handler($client, $params);
 }

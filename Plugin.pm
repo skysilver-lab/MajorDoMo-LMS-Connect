@@ -29,7 +29,6 @@ use Plugins::MajorDoMo::Settings;
 # Глобальные переменные
 # ----------------------------------------------------------------------------
 
-my $pluginReady = 0; 
 my $playmodeCurrent = 'stop';
 my $playmodeOld = 'stop';
 
@@ -42,27 +41,27 @@ my $log = Slim::Utils::Log->addLogCategory({
 });
 
 # ----------------------------------------------------------------------------
-my $prefs    = preferences('plugin.MajorDoMo'); 	#name of preferences file: prefs\plugin\MajorDoMo.pref
+# Путь и имя файла для хранения настроек плагина: prefs\plugin\MajorDoMo.pref
+# ----------------------------------------------------------------------------
+my $prefs    = preferences('plugin.MajorDoMo');
 my $srvprefs = preferences('server');
 
 # ----------------------------------------------------------------------------
 sub initPlugin {
 	my $classPlugin = shift;
 
-	# Not Calling our parent class prevents adds it to the player UI for the audio options
-	 $classPlugin->SUPER::initPlugin();
+	$classPlugin->SUPER::initPlugin();
 
-	# Initialize settings classes
 	my $classSettings = Plugins::MajorDoMo::Settings->new($classPlugin);
 
-	# Install callback to get client setup
 	Slim::Control::Request::subscribe( \&newPlayerCheck, [['client']],[['new']]);
 
-	# init the MajorDoMoSendMsg plugin
 	Plugins::MajorDoMo::MajorDoMoSendMsg->new( $classPlugin);
 
 }
 
+# ----------------------------------------------------------------------------
+# Если в LMS добавляется новый плеер, то вызывается эта функция
 # ----------------------------------------------------------------------------
 sub newPlayerCheck {
 	my $request = shift;
@@ -71,15 +70,14 @@ sub newPlayerCheck {
     if ( defined($client) ) {
 	    $log->debug( $client->name()." is: " . $client->id() );
 
-		# Do nothing if client is not a Receiver or Squeezebox
+		# Проверка типа плеера
 		if( !(($client->isa( "Slim::Player::Receiver")) || ($client->isa( "Slim::Player::Squeezebox2")))) {
 			$log->debug( "Not a receiver or a squeezebox.\n");
-			#now clear callback for those clients that are not part of the plugin
 			clearCallback();
 			return;
 		}
 		
-		#init the client
+		# Инициализация объекта для плеера
 		my $cprefs = $prefs->client($client);
 		my $pluginEnabled = $cprefs->get('pref_Enabled');
 		
@@ -90,7 +88,7 @@ sub newPlayerCheck {
 			return;
 		}
 
-		# Do nothing if plugin is disabled for this client
+		# Если плагин не активен для этого плеера, то ничего не делаем, иначе подписываемся на изменения статусов плеера.
 		if ( $pluginEnabled == 0) {
 			$log->debug( "Plugin Not Enabled for: ".$client->name()."\n");
 			clearCallback();
@@ -98,7 +96,7 @@ sub newPlayerCheck {
 		} else {
 			if ( $pluginEnabled == 1) {
 				$log->debug( "Plugin Enabled for: ".$client->name()."\n");
-				# Install callback to get client state changes
+				# При изменении статуса плеера будет вызвана функция commandCallback()
 				Slim::Control::Request::subscribe( \&commandCallback, [['power', 'play', 'playlist', 'pause', 'client', 'mixer' ]], $client);			
 			}			
 		}
@@ -114,7 +112,7 @@ sub clearCallback {
 
 
 # ----------------------------------------------------------------------------
-# Callback to get client state changes
+# Функция обработки статуса плеера
 # ----------------------------------------------------------------------------
 sub commandCallback {
 	my $request = shift;
@@ -128,10 +126,12 @@ sub commandCallback {
 	my $cprefs = $prefs->client($RequestClient);
 	my $pluginEnabled = $cprefs->get('pref_Enabled');
 	
+	# Если не удается определить статус плагина для данного плеера (активен или нет)
+	# (возможно плеер в группе синхронизации)
 	if ( !defined($pluginEnabled) ){
 		$log->debug( "Client not configured; maybe a synced player interferes ... \n");
 		
-		#if we're sync'd, get our buddies
+		# Если текущий плеер синхронизирован с другим плеером
 		if( $RequestClient->isSynced() ) {
 			$log->debug("Player is synced with ... \n");
 			my @buddies = $RequestClient->syncedWith();
@@ -150,12 +150,6 @@ sub commandCallback {
 		}
 	}
 	
-	# Do nothing if client is not defined
-	if(!defined( $client) || $pluginReady==0) {
-		$pluginReady=1;
-		return;
-	}
-	
 	my $cprefs = $prefs->client($client);
 		
 	$log->debug( "commandCallback() Client : " . $client->name() . "\n");
@@ -166,7 +160,7 @@ sub commandCallback {
 	$log->debug("PLAYMODE " . $playmode . "\n");
 
 	if( $request->isCommand([['power']]) ){
-		#$log->debug("Power request $request \n");
+
 		my $Power = $client->power();
 
 		if( $Power == 0){
@@ -207,7 +201,6 @@ sub commandCallback {
 		$log->debug("Mixer volume request from client " . $client->name() ."\n");
 		my $CurrentVolume = $client->volume();
 		$log->debug("Current volume is " . $CurrentVolume . "\n");
-		#$client->volume(0);
 		RequestVolume($client, $CurrentVolume);
 	}
 }
