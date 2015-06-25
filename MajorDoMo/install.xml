@@ -1,18 +1,18 @@
-<?xml version="1.0"?> 
+<?xml version="1.0"?>
  <extension>
-    <name>PLUGIN_MAJORDOMO_MODULE_NAME</name> 
-    <creator>Agaphonov Dmitri</creator> 
-    <defaultState>enabled</defaultState> 
-    <description>PLUGIN_MAJORDOMO_DESCRIPTION</description> 
-    <email>skysilver.da@gmail.com</email> 
-    <homepageURL>http://skysilver-lab.github.io/MajorDoMo-LMS-Connect</homepageURL> 
+    <name>PLUGIN_MAJORDOMO_MODULE_NAME</name>
+    <creator>Agaphonov Dmitri</creator>
+    <defaultState>enabled</defaultState>
+    <description>PLUGIN_MAJORDOMO_DESCRIPTION</description>
+    <email>skysilver.da@gmail.com</email>
+    <homepageURL>http://skysilver-lab.github.io/MajorDoMo-LMS-Connect</homepageURL>
 	<icon>plugins/MajorDoMo/html/images/MajorDoMo.png</icon>
-    <module>Plugins::MajorDoMo::Plugin</module> 
+    <module>Plugins::MajorDoMo::Plugin</module>
 	<targetApplication>
-		<id>Logitech Media Server</id> 
-		<maxVersion>*</maxVersion> 
-		<minVersion>7.7</minVersion> 
+		<id>Logitech Media Server</id>
+		<maxVersion>*</maxVersion>
+		<minVersion>7.7</minVersion>
 	</targetApplication>
-    <type>2</type> 
-    <version>0.3.0</version> 
+    <type>2</type>
+    <version>0.3.0</version>
  </extension>
