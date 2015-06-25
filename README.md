@@ -1,2 +1,2 @@
 # MajorDoMo-LMS-Connect
-MajorDoMo Connect Pugin for LMS
+Плагин для интеграции LMS с системой домашней автоматизации MajorDoMo.

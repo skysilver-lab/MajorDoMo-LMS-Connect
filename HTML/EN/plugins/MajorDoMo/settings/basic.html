@@ -1,0 +1,55 @@
+[% PROCESS settings/header.html %]
+
+	<input type="hidden" name="playername" value="[% playername %]">
+	<input type="hidden" name="mode" value="">
+	
+	
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER settingGroup title="PLUGIN_MAJORDOMO_INTRO" %] [% END %]
+	
+		[% WRAPPER settingGroup title="PLUGIN_MAJORDOMO_ENABLED" desc="PLUGIN_MAJORDOMO_ENABLED_DESC" %] &nbsp;
+			<input name="pref_Enabled" type="checkbox" [% IF prefs.pref_Enabled %] checked ] [% END %] >
+		[% END %]
+		
+	[% END %]
+	
+	[% WRAPPER setting title=" " %][% END %]
+
+	[% WRAPPER settingSection %]
+	
+		[% WRAPPER settingGroup title="PLUGIN_MAJORDOMO_HEADER_GENERAL" %]  [% END %] 
+
+		[% WRAPPER settingGroup title="PLUGIN_MAJORDOMO_SRVADDRESS_DEFAULT" desc="PLUGIN_MAJORDOMO_SRVADDRESS_DESC" %]
+			<input type="text" class="stdedit" name="srvAddress" id="srvAddress" value="[% prefs.srvAddress %]" size="80" />
+		[% END %]
+
+		[% WRAPPER settingGroup title="PLUGIN_MAJORDOMO_ONMSG" desc="PLUGIN_MAJORDOMO_ONMSG_DESC" %]
+			<input type="text" class="stdedit" name="msgOn1" id="msgOn1" value="[% prefs.msgOn1 %]" size="80" />
+		[% END %]
+	
+		[% WRAPPER settingGroup title="PLUGIN_MAJORDOMO_OFFMSG" desc="PLUGIN_MAJORDOMO_OFFMSG_DESC" %]
+			<input type="text" class="stdedit" name="msgOff1" id="msgOff1" value="[% prefs.msgOff1 %]" size="80" />
+		[% END %]
+		
+		[% WRAPPER settingGroup title="PLUGIN_MAJORDOMO_PLAYMSG" desc="PLUGIN_MAJORDOMO_PLAYMSG_DESC" %]
+			<input type="text" class="stdedit" name="msgPlay1" id="msgPlay1" value="[% prefs.msgPlay1 %]" size="80" />
+		[% END %]
+		
+		[% WRAPPER settingGroup title="PLUGIN_MAJORDOMO_PAUSEMSG" desc="PLUGIN_MAJORDOMO_PAUSEMSG_DESC" %]
+			<input type="text" class="stdedit" name="msgPause1" id="msgPause1" value="[% prefs.msgPause1 %]" size="80" />
+		[% END %]
+		
+		[% WRAPPER settingGroup title="PLUGIN_MAJORDOMO_VOLUMEMSG" desc="PLUGIN_MAJORDOMO_VOLUMEMSG_DESC" %]
+			<input type="text" class="stdedit" name="msgVolume1" id="msgVolume1" value="[% prefs.msgVolume1 %]" size="80" />
+		[% END %]
+		
+	[% END %]
+
+	[% WRAPPER setting title=" " %][% END %]	
+
+	[% WRAPPER settingSection %]
+		[% WRAPPER settingGroup title="PLUGIN_MAJORDOMO_SAVE" %][% END %]
+	[% END %]
+	
+[% PROCESS settings/footer.html %]

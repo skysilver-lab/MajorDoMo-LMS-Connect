@@ -1,0 +1,75 @@
+﻿# Strings for MAJORDOMO
+PLUGIN_MAJORDOMO
+	RU	MajorDoMo
+	EN	MajorDoMo
+
+PLUGIN_MAJORDOMO_MODULE_NAME
+	RU	MajorDoMo
+	EN	MajorDoMo
+
+PLUGIN_MAJORDOMO_DESCRIPTION
+	RU	Плагин отправляет команды на сервер MajorDoMo, когда изменяется статус плеера.
+	EN	Плагин отправляет команды на сервер MajorDoMo, когда изменяется статус плеера.
+
+PLUGIN_MAJORDOMO_INTRO
+	RU	Мой первый плагин.
+	
+PLUGIN_MAJORDOMO_BASIC_SETTINGS_HEADER
+	EN	Changes made here effect the functionality of the MajorDoMo plugin.
+	DE	Aenderungen hier betreffen die Funktionen des MajorDoMo Plugins.
+
+PLUGIN_MAJORDOMO_SAVE
+	RU	Необходимо перезапустить службу LMS, чтобы применить изменения.
+	
+PLUGIN_MAJORDOMO_ENABLED
+	RU	Включить плагин для данного плеера?
+
+PLUGIN_MAJORDOMO_ENABLED_DESC
+	EN	If you wish to send network messages when the Squeezebox is turned on or off, enable this checkbox.
+	DE	Wenn Sie m?chten, dass Netzwerknachrichten versendet werden, wenn die Squeezebox ein- bzw. ausgeschaltet wird, aktivieren Sie dieses Feld.
+
+PLUGIN_MAJORDOMO_HEADER_GENERAL
+	RU	Настройки
+	
+PLUGIN_MAJORDOMO_SRVADDRESS_DEFAULT
+	RU	IP-адрес и порт сервера MajorDoMo
+	
+PLUGIN_MAJORDOMO_SRVADDRESS
+	EN	Connection
+	DE	Connection
+
+PLUGIN_MAJORDOMO_SRVADDRESS_DESC
+	EN	Enter the address of the default home automation server ("xxx.xxx.xxx.xxx:port" or "http://[user:pw@]xxx.xxx.xxx.xxx:port"). If the connection string starts with 'http://', a http-GET request is issued. Note: This plugin will only work for fixed IP addresses.
+	DE	Geben Sie die Adresse des (Default) Home Automation Servers ein ("xxx.xxx.xxx.xxx:port" or "http://[user:pw@]xxx.xxx.xxx.xxx:port"). Wenn der Connection-String mit 'http://' beginnt, wird ein http-GET request ausgef?hrt. Achtung: Dieses Plugin funktioniert nur mit festen IP-Adressen.
+
+PLUGIN_MAJORDOMO_OFFMSG
+	RU	Команда при выключении плеера
+	
+PLUGIN_MAJORDOMO_OFFMSG_DESC
+	EN	The command to turn off a zone.
+	DE	Das Kommando zum Ausschalten der Zone.	
+
+PLUGIN_MAJORDOMO_ONMSG
+	RU	Команда при включении плеера
+	
+PLUGIN_MAJORDOMO_ONMSG_DESC
+	EN	The command to turn on a zone.
+	DE	Das Kommando zum Einschalten der Zone.
+	
+PLUGIN_MAJORDOMO_PLAYMSG
+	RU	Команда при старте проигрывания
+
+PLUGIN_MAJORDOMO_PLAYMSG_DESC
+	RU	Команда при старте проигрывания
+
+PLUGIN_MAJORDOMO_PAUSEMSG
+	RU	Команда при паузе
+
+PLUGIN_MAJORDOMO_PAUSEMSG_DESC
+	RU	Команда при паузе
+	
+PLUGIN_MAJORDOMO_VOLUMEMSG
+	RU	Команда при изменении громкости
+
+PLUGIN_MAJORDOMO_VOLUMEMSG_DESC
+	RU	Команда при изменении громкости
