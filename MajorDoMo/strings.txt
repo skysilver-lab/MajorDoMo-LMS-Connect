@@ -57,3 +57,9 @@ PLUGIN_MAJORDOMO_VOLUMEMSG
 
 PLUGIN_MAJORDOMO_VOLUMEMSG_DESC
 	RU	Например "/objects/?script=lms&player=mr3020&status=volume", запускает сценарий с названием "lms" и передает ему параметры "player" (равный "mr3020") и "status" (равный "volume"). При выполнении этого HTTP-запроса в сценарий также передается параметр "vollevel" со значением текущего уровня громкости плеера.
+
+PLUGIN_MAJORDOMO_NEWSONGMSG
+	RU	Команда при смене трека
+
+PLUGIN_MAJORDOMO_NEWSONGMSG_DESC
+	RU	Например "/objects/?script=lms&player=mr3020&status=newsong", запускает сценарий с названием "lms" и передает ему параметры "player" (равный "mr3020") и "status" (равный "newsong"). При выполнении этого HTTP-запроса в сценарий также передаются параметры "track" (название трека), "artist" (исполнитель) и "album" (название альбома). Чтобы корректно обработать кириллицу, необходимо эти параметры декодировать на стороне MajorDoMo с помощью функции urldecode().

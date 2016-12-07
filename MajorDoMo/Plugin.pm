@@ -5,10 +5,14 @@
 #	Copyright (c) 2015 Agaphonov Dmitri
 #	All rights reserved.
 #
+#	2016-12-06 Add track info request
 
 package Plugins::MajorDoMo::Plugin;
 use strict;
+
 use base qw(Slim::Plugin::Base);
+
+use URI::Escape qw(uri_escape_utf8);
 
 use Slim::Utils::Strings qw(string);
 use Slim::Utils::Log;
@@ -183,7 +187,7 @@ sub commandCallback {
 		 || $request->isCommand([['playlist'], ['index']]) 
 	     || $request->isCommand([['playlist'], ['newsong']]) ){
 		 
-			 
+
 		if( ($playmode eq "play") && (($playmodeOld eq "pause") || ($playmodeOld eq "stop")) ){
 			$log->debug( "Play request from client " . $client->name() ."\n");
 			RequestPlay($client);
@@ -193,6 +197,11 @@ sub commandCallback {
 			$log->debug("Pause request from client " . $client->name() ."\n");
 			RequestPause($client);
 		}
+
+		if( $request->isCommand([['playlist'], ['newsong']]) ){
+			$log->debug("Newsong request from client " . $client->name() ."\n");
+			RequestNewsong($client);
+		}		
 
 		$playmodeOld = $playmode;
 
@@ -205,6 +214,32 @@ sub commandCallback {
 	}
 }
 
+# ----------------------------------------------------------------------------
+sub RequestNewsong {
+
+	my $client = shift;
+	my $cprefs = $prefs->client($client);
+	my $Cmd = '';
+	
+	if( length($cprefs->get('msgNewsong')) > 0 ){
+		
+		my $song = Slim::Player::Playlist::song($client);
+		my $track = Slim::Music::Info::displayText($client, $song, 'TITLE');
+		my $artist = Slim::Music::Info::displayText($client, $song, 'ARTIST');
+		my $album = Slim::Music::Info::displayText($client, $song, 'ALBUM');
+	
+		$log->debug("Current song Info: " . $track . " --- " . $artist . " --- " . $album . "\n");
+
+		$Cmd = $cprefs->get('msgNewsong') . "&track=" . uri_escape_utf8($track) . "&artist=" . uri_escape_utf8($artist) . "&album=" . uri_escape_utf8($album);
+	
+		$log->debug("RequestNewsong() Msg: " . $Cmd . "\n");
+	
+		SendCommands($client, $Cmd);
+	} else {
+		$log->error("RequestNewsong() Msg: NOT URL REQUEST IN SETTINGS \n");	
+	}
+
+}
 
 # ----------------------------------------------------------------------------
 sub RequestPowerOn {

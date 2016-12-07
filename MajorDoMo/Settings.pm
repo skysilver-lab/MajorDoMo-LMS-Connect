@@ -121,24 +121,28 @@ sub handler {
 		
 		# HTTP-запросы для разных состояний плеера
 		if ($params->{'msgOn1'}) { 
-			my $msgOn = $params->{'msgOn1'};
-			$prefs->client($client)->set('msgOn1', "$msgOn"); 
+			my $msgOn1 = $params->{'msgOn1'};
+			$prefs->client($client)->set('msgOn1', "$msgOn1"); 
 		}
 		if ($params->{'msgOff1'}) { 
-			my $msgOff = $params->{'msgOff1'};
-			$prefs->client($client)->set('msgOff1', "$msgOff"); 
+			my $msgOff1 = $params->{'msgOff1'};
+			$prefs->client($client)->set('msgOff1', "$msgOff1"); 
 		}
 		if ($params->{'msgPlay1'}) { 
-			my $msgOff = $params->{'msgPlay1'};
-			$prefs->client($client)->set('msgPlay1', "$msgOff"); 
+			my $msgPlay1 = $params->{'msgPlay1'};
+			$prefs->client($client)->set('msgPlay1', "$msgPlay1"); 
 		}
 		if ($params->{'msgPause1'}) { 
-			my $msgOff = $params->{'msgPause1'};
-			$prefs->client($client)->set('msgPause1', "$msgOff"); 
+			my $msgPause1 = $params->{'msgPause1'};
+			$prefs->client($client)->set('msgPause1', "$msgPause1"); 
 		}
 		if ($params->{'msgVolume1'}) { 
-			my $msgOff = $params->{'msgVolume1'};
-			$prefs->client($client)->set('msgVolume1', "$msgOff"); 
+			my $msgVolume1 = $params->{'msgVolume1'};
+			$prefs->client($client)->set('msgVolume1', "$msgVolume1"); 
+		}
+		if ($params->{'msgNewsong'}) { 
+			my $msgNewsong = $params->{'msgNewsong'};
+			$prefs->client($client)->set('msgNewsong', "$msgNewsong"); 
 		}
 		
 	}
@@ -154,7 +158,8 @@ sub handler {
 	$params->{'prefs'}->{'msgOff1'} = $prefs->client($client)->get('msgOff1'); 
 	$params->{'prefs'}->{'msgPlay1'} = $prefs->client($client)->get('msgPlay1'); 
 	$params->{'prefs'}->{'msgPause1'} = $prefs->client($client)->get('msgPause1'); 
-	$params->{'prefs'}->{'msgVolume1'} = $prefs->client($client)->get('msgVolume1'); 
+	$params->{'prefs'}->{'msgVolume1'} = $prefs->client($client)->get('msgVolume1');
+	$params->{'prefs'}->{'msgNewsong'} = $prefs->client($client)->get('msgNewsong');  
 	
 	return $class->SUPER::handler($client, $params);
 }
